@@ -516,8 +516,8 @@ jobs:
         with:
           client-id: ${{ env.CLAWSWEEPER_APP_CLIENT_ID }}
           private-key: ${{ secrets.CLAWSWEEPER_APP_PRIVATE_KEY }}
-          owner: ${{ vars.CLAWSWEEPER_REPAIR_OWNER || 'openclaw' }}
-          repositories: ${{ vars.CLAWSWEEPER_REPAIR_REPO || 'clawsweeper' }}
+          owner: ${{ vars.CLAWSWEEPER_FINDINGS_DISPATCH_OWNER || 'openclaw' }}
+          repositories: ${{ vars.CLAWSWEEPER_FINDINGS_DISPATCH_REPO || 'clawsweeper' }}
           permission-actions: write
           permission-contents: write
 
@@ -526,7 +526,7 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.clawsweeper-token.outputs.token }}
           ENABLED: ${{ vars.CLAWSWEEPER_COMMIT_FINDINGS_ENABLED || 'true' }}
-          REPAIR_REPO: ${{ vars.CLAWSWEEPER_REPAIR_OWNER || 'openclaw' }}/${{ vars.CLAWSWEEPER_REPAIR_REPO || 'clawsweeper' }}
+          REPAIR_REPO: ${{ vars.CLAWSWEEPER_FINDINGS_DISPATCH_OWNER || 'openclaw' }}/${{ vars.CLAWSWEEPER_FINDINGS_DISPATCH_REPO || 'clawsweeper' }}
         run: |
           set -euo pipefail
           node dist/commit-sweeper.js dispatch-findings \
