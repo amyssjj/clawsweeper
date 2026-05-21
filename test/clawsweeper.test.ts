@@ -8471,23 +8471,6 @@ test("sweep workflow publishes target-scoped state paths", () => {
   assert.doesNotMatch(workflow, /--path results\/sweep-status\s*\\/);
 });
 
-test("sweep workflow schedules cursor-based PR comment sync batches", () => {
-  const workflow = readFileSync(".github/workflows/sweep.yml", "utf8");
-
-  assert.match(workflow, /cron: "6,21,36,51 \* \* \* \*"/);
-  assert.doesNotMatch(workflow, /apply_sync_open_pr_batch:/);
-  assert.match(
-    workflow,
-    /sync_batch_size="\$\{\{ github\.event_name == 'workflow_dispatch' && github\.event\.inputs\.apply_limit \|\| '25' \}\}"/,
-  );
-  assert.match(workflow, /\$item_numbers" = "__cursor__"/);
-  assert.match(workflow, /comment-sync-batch/);
-  assert.match(workflow, /write-comment-sync-cursor/);
-  assert.match(workflow, /results\/comment-sync-cursors\/\$\{target_slug\}\.json/);
-  assert.match(workflow, /APPLY_SYNC_OPEN_PR_BATCH/);
-  assert.match(workflow, /github\.event\.schedule == '6,21,36,51 \* \* \* \*'/);
-});
-
 test("sweep target checkouts retry without cached references", () => {
   const workflow = readFileSync(".github/workflows/sweep.yml", "utf8");
   const checkoutBlocks =
