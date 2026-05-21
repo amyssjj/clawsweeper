@@ -1594,7 +1594,7 @@ jobs:
           GH_TOKEN: ${{ steps.state-token.outputs.token }}
         run: |
           gh workflow run dashboard.yml \
-            --repo openclaw/clawsweeper-state \
+            --repo Amyssjj/clawsweeper-state \
             --ref main || echo "Best-effort dashboard refresh dispatch failed; scheduled state dashboard will retry."
 
   apply-existing:
