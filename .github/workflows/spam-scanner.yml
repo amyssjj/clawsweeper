@@ -45,8 +45,6 @@ on:
         required: true
         default: gpt-4o-mini
         type: string
-  schedule:
-    - cron: "17 * * * *"
 
 permissions:
   contents: write
